@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: minibank.MiniBank
+Created-By: 26.0.1 (Oracle Corporation)
+
