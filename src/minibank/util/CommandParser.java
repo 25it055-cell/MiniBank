@@ -43,3 +43,4 @@ public class CommandParser {
         return new Command(type, accountNumber, amount);
     }
 }
+

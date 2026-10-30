@@ -8,3 +8,4 @@ public class InvalidAmountException extends BankException {
         super(message);
     }
 }
+

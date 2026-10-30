@@ -45,3 +45,4 @@ public class FixedDepositAccount extends Account implements Premium {
         return "FIXED_DEPOSIT";
     }
 }
+

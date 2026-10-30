@@ -146,3 +146,4 @@ Minibank/
 - **Generics & Reflection**:
   - Generic `Repository<T>` reads `@Id` by reflection and works seamlessly for both `Account` and `Customer`.
   - Reflective `AnnotationValidator` checks `@Positive` and `@MaxLength`.
+

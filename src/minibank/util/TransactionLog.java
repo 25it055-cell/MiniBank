@@ -27,3 +27,4 @@ public class TransactionLog {
                 StandardOpenOption.CREATE, StandardOpenOption.APPEND);
     }
 }
+

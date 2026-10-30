@@ -35,3 +35,4 @@ public class Validator {
         return amountStr != null && AMOUNT_PATTERN.matcher(amountStr.trim()).matches();
     }
 }
+

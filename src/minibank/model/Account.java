@@ -188,3 +188,4 @@ public abstract class Account implements Transactable, InterestBearing, Comparab
                getAccountType() + " | " + (active ? "ACTIVE" : "INACTIVE");
     }
 }
+

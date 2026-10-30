@@ -60,3 +60,4 @@ public class AnnotationValidator {
         return errors.toArray(new String[0]);
     }
 }
+

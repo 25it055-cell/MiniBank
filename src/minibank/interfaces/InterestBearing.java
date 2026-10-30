@@ -22,3 +22,4 @@ public interface InterestBearing {
         return yearlyInterest() / 12.0;
     }
 }
+
