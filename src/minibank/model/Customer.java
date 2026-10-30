@@ -6,10 +6,6 @@ import minibank.model.annotation.MaxLength;
 import java.io.Serializable;
 import java.util.Objects;
 
-/**
- * Customer class representing a bank customer (Practicals 2, 3, 7, 11, 13 Part B).
- * Implements Serializable, Cloneable, and encapsulates customer details.
- */
 public class Customer implements Cloneable, Serializable {
     private static final long serialVersionUID = 1L;
     private static long customerCounter = 100;
@@ -23,9 +19,6 @@ public class Customer implements Cloneable, Serializable {
     private String mobile;
     private Address address;
 
-    /**
-     * Static helper method to generate unique customer IDs (e.g. CUST101).
-     */
     private static synchronized String generateCustomerId() {
         customerCounter++;
         return "CUST" + customerCounter;
@@ -43,7 +36,6 @@ public class Customer implements Cloneable, Serializable {
         this.address = address;
     }
 
-    // Constructor with explicit ID (useful for persistence loading/deserialization)
     public Customer(String customerId, String name, String email, String mobile, Address address) {
         this.customerId = customerId;
         this.name = name;
@@ -88,9 +80,6 @@ public class Customer implements Cloneable, Serializable {
         this.mobile = mobile;
     }
 
-    /**
-     * Deep clone implementation (Practical 3 Part B).
-     */
     @Override
     public Customer clone() {
         try {
@@ -128,9 +117,6 @@ public class Customer implements Cloneable, Serializable {
                 '}';
     }
 
-    /**
-     * Public static nested class Address (Practical 3 Part B).
-     */
     public static class Address implements Cloneable, Serializable {
         private static final long serialVersionUID = 1L;
         private final String line;
@@ -170,4 +156,3 @@ public class Customer implements Cloneable, Serializable {
         }
     }
 }
-

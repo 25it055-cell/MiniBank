@@ -2,10 +2,6 @@ package minibank.service;
 
 import minibank.model.Command;
 
-/**
- * Shared bounded array buffer for producer-consumer transaction coordination
- * using wait() and notifyAll() inside synchronized blocks (Practical 10 Part B).
- */
 public class ProducerConsumerBuffer {
     private final Command[] buffer;
     private int count = 0;
@@ -17,10 +13,6 @@ public class ProducerConsumerBuffer {
         this.buffer = new Command[capacity];
     }
 
-    /**
-     * Producer method adds a transaction command to buffer.
-     * Waits when buffer is full.
-     */
     public synchronized void produce(Command cmd) throws InterruptedException {
         while (count == buffer.length && !stopped) {
             wait();
@@ -30,13 +22,9 @@ public class ProducerConsumerBuffer {
         buffer[in] = cmd;
         in = (in + 1) % buffer.length;
         count++;
-        notifyAll(); // Notify consumer
+        notifyAll();
     }
 
-    /**
-     * Consumer method retrieves and removes transaction command from buffer.
-     * Waits when buffer is empty.
-     */
     public synchronized Command consume() throws InterruptedException {
         while (count == 0 && !stopped) {
             wait();
@@ -48,7 +36,7 @@ public class ProducerConsumerBuffer {
         Command cmd = buffer[out];
         out = (out + 1) % buffer.length;
         count--;
-        notifyAll(); // Notify producer
+        notifyAll();
         return cmd;
     }
 
@@ -61,4 +49,3 @@ public class ProducerConsumerBuffer {
         return count;
     }
 }
-

@@ -2,11 +2,6 @@ package minibank.model;
 
 import minibank.interfaces.Premium;
 
-/**
- * FixedDepositAccount subclass (Practical 5 Part B).
- * Offers 7.0% interest rate; funds are locked (canWithdraw returns false).
- * Implements the Premium marker interface (Practical 6 Part B).
- */
 public class FixedDepositAccount extends Account implements Premium {
     private static final long serialVersionUID = 1L;
     private final int tenureMonths;
@@ -32,7 +27,7 @@ public class FixedDepositAccount extends Account implements Premium {
 
     @Override
     public synchronized boolean canWithdraw(long amount) {
-        // Funds are locked in Fixed Deposit
+
         return false;
     }
 
@@ -45,4 +40,3 @@ public class FixedDepositAccount extends Account implements Premium {
         return "FIXED_DEPOSIT";
     }
 }
-

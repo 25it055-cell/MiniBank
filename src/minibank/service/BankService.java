@@ -18,7 +18,7 @@ import minibank.util.StatePersister;
 import minibank.util.StatementFormatter;
 import minibank.util.TransactionLog;
 
-import static minibank.util.Validator.*; // Static import (Practical 6 Part B)
+import static minibank.util.Validator.*;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -27,10 +27,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-/**
- * BankService providing business logic and wiring repositories, validation,
- * persistence, concurrency, and exceptions together (Practical 14 Part B).
- */
 public class BankService {
     private final Repository<Account> accountRepo;
     private final Repository<Customer> customerRepo;
@@ -47,9 +43,6 @@ public class BankService {
         loadSavedAccounts();
     }
 
-    /**
-     * Opens a new account after validating customer input (Practicals 2, 4, 5, 14 Part B).
-     */
     @Audit(action = "OPEN_ACCOUNT")
     public Account openAccount(String accountType, String ownerName, long initialBalance,
                                String email, String mobile, String line, String city, String pincode)
@@ -106,9 +99,6 @@ public class BankService {
         return account;
     }
 
-    /**
-     * Deposits funds into an account (Practicals 2, 8, 14 Part B).
-     */
     @Audit(action = "DEPOSIT")
     public void deposit(String accountNumber, long amount) throws BankException {
         AuditLogger.logIfAudited(BankService.class, "deposit", new Object[]{accountNumber, amount});
@@ -124,9 +114,6 @@ public class BankService {
         }
     }
 
-    /**
-     * Withdraws funds from an account (Practicals 2, 5, 8, 14 Part B).
-     */
     @Audit(action = "WITHDRAW")
     public void withdraw(String accountNumber, long amount) throws BankException {
         AuditLogger.logIfAudited(BankService.class, "withdraw", new Object[]{accountNumber, amount});
@@ -142,9 +129,6 @@ public class BankService {
         }
     }
 
-    /**
-     * Inter-account funds transfer (Practicals 8, 10, 14 Part B).
-     */
     @Audit(action = "TRANSFER")
     public void transfer(String fromAccountNum, String toAccountNum, long amount) throws BankException {
         AuditLogger.logIfAudited(BankService.class, "transfer", new Object[]{fromAccountNum, toAccountNum, amount});
@@ -164,24 +148,15 @@ public class BankService {
         }
     }
 
-    /**
-     * Generates account statement (Practical 4 Part B).
-     */
     public String statement(String accountNumber) throws BankException {
         Account account = getAccountOrThrow(accountNumber);
         return StatementFormatter.buildStatement(account);
     }
 
-    /**
-     * Retrieves all accounts sorted by balance descending (Practical 12 Part B).
-     */
     public List<Account> listAccounts() {
         return accountStore.sortedByBalance();
     }
 
-    /**
-     * Supplementary problem: search accounts by owner name (case-insensitive).
-     */
     public List<Account> searchAccountsByName(String name) {
         if (name == null || name.isBlank()) return List.of();
         String query = name.toLowerCase();
@@ -194,9 +169,6 @@ public class BankService {
         return matches;
     }
 
-    /**
-     * Batch transaction executor utilizing managed thread pool (Practicals 10, 14 Part B).
-     */
     public void processBatch(List<Command> commands) {
         if (commands == null || commands.isEmpty()) return;
 
@@ -217,16 +189,10 @@ public class BankService {
         processor.stop();
     }
 
-    /**
-     * Generates daily NIO summary report (Practical 11 & 14 Part B).
-     */
     public String generateReport() throws IOException {
         return ReportGenerator.generateDailyReport(logsDir, reportFile);
     }
 
-    /**
-     * Loads saved accounts from disk (Practical 11 Part B).
-     */
     public void loadSavedAccounts() {
         try {
             Account[] accounts = StatePersister.load(dataPath);
@@ -242,9 +208,6 @@ public class BankService {
         }
     }
 
-    /**
-     * Saves all accounts to disk (Practical 11 & 14 Part B).
-     */
     public void saveAccounts() {
         try {
             List<Account> accounts = accountRepo.findAll();
@@ -279,4 +242,3 @@ public class BankService {
         return accountStore;
     }
 }
-

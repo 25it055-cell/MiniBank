@@ -3,15 +3,8 @@ package minibank.util;
 import minibank.model.Command;
 import minibank.model.TransactionType;
 
-/**
- * Command Parser converting user input strings into typed Command objects (Practical 4 Part B).
- */
 public class CommandParser {
 
-    /**
-     * Parses a command line like "DEPOSIT AC0001 500" into a Command record.
-     * @throws IllegalArgumentException if line format is invalid or has wrong number of parts.
-     */
     public static Command parse(String line) {
         if (line == null || line.trim().isEmpty()) {
             throw new IllegalArgumentException("Empty command string");
@@ -43,4 +36,3 @@ public class CommandParser {
         return new Command(type, accountNumber, amount);
     }
 }
-

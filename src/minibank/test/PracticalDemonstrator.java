@@ -32,7 +32,7 @@ import minibank.util.StatementFormatter;
 import minibank.util.TransactionLog;
 import minibank.util.Validator;
 
-import static minibank.util.Validator.*; // Practical 6: Static import
+import static minibank.util.Validator.*;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -40,10 +40,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Complete Demonstration and Verification Suite for Practicals 1 to 14 (Part B).
- * Runs through every individual requirement sequentially and logs expected vs actual results.
- */
 public class PracticalDemonstrator {
 
     public static void main(String[] args) {
@@ -86,7 +82,6 @@ public class PracticalDemonstrator {
             System.out.println("  [" + opt.getCode() + "] " + opt.name() + " -> " + opt.getDescription());
         }
 
-        // Test switch expression
         MenuOption choice = MenuOption.DEPOSIT;
         String actionMessage = switch (choice) {
             case OPEN_ACCOUNT -> "Open Account selected.";
@@ -107,7 +102,6 @@ public class PracticalDemonstrator {
         System.out.println("  " + c1);
         System.out.println("  " + c2);
 
-        // Account array with 3 objects
         Account[] accounts = new Account[]{
                 new SavingsAccount("Riya", 5000),
                 new CurrentAccount("Aarav", 3000),
@@ -140,7 +134,7 @@ public class PracticalDemonstrator {
 
     public static void demonstratePractical3() {
         printHeader(3, "Overriding Object Methods (toString, equals, hashCode, clone) & Nested Class");
-        // Test toString()
+
         Account a1 = new SavingsAccount("AC0001", "Riya", 4000, true, 1000);
         Account a2 = new SavingsAccount("AC0001", "Riya Duplicate", 4000, true, 1000);
         Account a3 = new SavingsAccount("AC0002", "Other", 4000, true, 1000);
@@ -150,7 +144,6 @@ public class PracticalDemonstrator {
         System.out.println("a1.equals(a3) with diff account number: " + a1.equals(a3) + " (Expected: false)");
         System.out.println("a1 instanceof Account: " + (a1 instanceof Account) + " (Expected: true)");
 
-        // Customer nested static Address and clone()
         Customer.Address addr = new Customer.Address("123 Tech Park", "Bengaluru", "560001");
         Customer orig = new Customer("CUST101", "Karan", "karan@xyz.com", "9876543210", addr);
         Customer copy = orig.clone();
@@ -171,13 +164,11 @@ public class PracticalDemonstrator {
         System.out.println("  isValidPan(\"ABCDE1234F\"):     " + isValidPan("ABCDE1234F") + " (Expected: true)");
         System.out.println("  isValidIfsc(\"SBIN0001234\"):    " + isValidIfsc("SBIN0001234") + " (Expected: true)");
 
-        // Command parsing
         String cmdLine = "DEPOSIT AC0001 500";
         Command cmd = CommandParser.parse(cmdLine);
         System.out.println("\nParsed command from \"" + cmdLine + "\":");
         System.out.println("  Type: " + cmd.type() + ", Account: " + cmd.accountNumber() + ", Amount: " + cmd.amount());
 
-        // StatementFormatter using StringBuilder
         Account testAcc = new SavingsAccount("AC0001", "Riya Sharma", 5500, true, 1000);
         System.out.println("\nStatement Formatter Output (built via StringBuilder):\n" + StatementFormatter.buildStatement(testAcc));
     }
@@ -195,7 +186,6 @@ public class PracticalDemonstrator {
             System.out.printf("  %-16s | Rate: %4.1f%% | Yearly Est: %8.2f INR | canWithdraw(30000): %s\n",
                     acc.getAccountType(), acc.interestRate(), acc.yearlyInterest(), acc.canWithdraw(30000));
 
-            // Pattern matching instanceof
             if (acc instanceof CurrentAccount ca) {
                 System.out.println("    -> Special handling: CurrentAccount Overdraft Limit is " + ca.getOverdraftLimit() + " INR");
             } else if (acc instanceof FixedDepositAccount fda) {
@@ -208,13 +198,11 @@ public class PracticalDemonstrator {
         printHeader(6, "Interfaces (Transactable, InterestBearing, WithdrawRule, Premium) & Lambdas");
         Account testAcc = new SavingsAccount("Meera", 10000, 1000);
 
-        // Check interfaces
         System.out.println("Account implements Transactable: " + (testAcc instanceof Transactable));
         System.out.println("Account implements InterestBearing: " + (testAcc instanceof InterestBearing));
         System.out.println("Default interface yearlyInterest: " + testAcc.yearlyInterest() + " INR");
         System.out.println("Default interface monthlyInterest: " + testAcc.monthlyInterest() + " INR");
 
-        // WithdrawRule with Anonymous Class
         WithdrawRule anonymousRule = new WithdrawRule() {
             @Override
             public boolean allow(Account account, long amount) {
@@ -222,7 +210,6 @@ public class PracticalDemonstrator {
             }
         };
 
-        // WithdrawRule with Lambda Expression
         WithdrawRule lambdaRule = (account, amount) -> amount <= 5000 && account.getBalance() >= amount;
 
         System.out.println("Anonymous class allow(testAcc, 4000): " + anonymousRule.allow(testAcc, 4000) + " (Expected: true)");
@@ -236,7 +223,6 @@ public class PracticalDemonstrator {
     public static void demonstratePractical7() {
         printHeader(7, "Custom Annotations (@Id, @Positive, @MaxLength) & Reflection Validator");
 
-        // Account with invalid negative balance to test reflection validator
         Account invalidAccount = new SavingsAccount("AC9999", "Very Long Name Exceeding Maximum Allowed Length For Customer Name Field In Test", -100, true, 1000);
         Account validAccount = new SavingsAccount("AC0001", "Neha", 5000, true, 1000);
 
@@ -255,7 +241,6 @@ public class PracticalDemonstrator {
         printHeader(8, "Custom Exception Hierarchy & Try-With-Resources");
         Account acc = new SavingsAccount("Suresh", 1000, 1000);
 
-        // Test InsufficientFundsException carrying shortfall
         try {
             System.out.println("Attempting withdrawal of 5000 from balance 1000:");
             acc.withdraw(5000);
@@ -266,7 +251,6 @@ public class PracticalDemonstrator {
             System.out.println("  Invalid amount: " + e.getMessage());
         }
 
-        // Test InvalidAmountException
         try {
             System.out.println("\nAttempting deposit of -500:");
             acc.deposit(-500);
@@ -274,11 +258,10 @@ public class PracticalDemonstrator {
             System.out.println("  Caught InvalidAmountException: " + e.getMessage());
         }
 
-        // Try-with-resources with AutoCloseable BankSession
         System.out.println("\nExecuting Try-With-Resources with BankSession:");
         try (BankSession session = new BankSession("SESS-883", "SystemAdmin")) {
             session.executeOperation("Vault verification check");
-        } // Automatically closed here
+        }
     }
 
     public static void demonstratePractical9() {
@@ -309,7 +292,6 @@ public class PracticalDemonstrator {
     public static void demonstratePractical10() {
         printHeader(10, "TransactionProcessor Thread Pool, Producer-Consumer & Deadlock Resolution");
 
-        // 1. Thread Pool TransactionProcessor
         System.out.println("1. Testing TransactionProcessor with 4-thread pool:");
         TransactionProcessor tp = new TransactionProcessor();
         Account testAcc = new SavingsAccount("PoolTest", 1000, 0);
@@ -324,7 +306,6 @@ public class PracticalDemonstrator {
         tp.stop();
         System.out.println("   Completed tasks via thread pool: " + tp.getCompletedTasksCount() + ", Account balance: " + testAcc.getBalance());
 
-        // 2. Producer-Consumer Buffer
         System.out.println("\n2. Testing Producer-Consumer coordination with wait()/notifyAll():");
         ProducerConsumerBuffer buffer = new ProducerConsumerBuffer(3);
         Thread producer = new Thread(() -> {
@@ -354,7 +335,6 @@ public class PracticalDemonstrator {
             consumer.join();
         } catch (InterruptedException ignored) {}
 
-        // 3. Deadlock prevention
         System.out.println("\n3. Testing Safe Inter-Account Transfer (Deadlock Prevention):");
         Account accA = new SavingsAccount("AC0001", "UserA", 10000, 0);
         Account accB = new SavingsAccount("AC0002", "UserB", 10000, 0);
@@ -392,7 +372,7 @@ public class PracticalDemonstrator {
         Path testReport = Paths.get("logs", "demo_report.txt");
 
         try {
-            // Save state
+
             Account[] savedAccounts = new Account[]{
                     new SavingsAccount("AC0011", "PersistUser1", 12000, true, 1000),
                     new CurrentAccount("AC0012", "PersistUser2", 24000, true, 5000)
@@ -400,19 +380,16 @@ public class PracticalDemonstrator {
             StatePersister.save(savedAccounts, testData);
             System.out.println("Saved " + savedAccounts.length + " accounts to " + testData);
 
-            // Reload state
             Account[] loadedAccounts = StatePersister.load(testData);
             System.out.println("Reloaded accounts successfully: " + loadedAccounts.length + " accounts");
             for (Account a : loadedAccounts) {
                 System.out.println("  " + a);
             }
 
-            // Append logs using NIO
             TransactionLog.append(testLog, "DEPOSIT AC0011 5000");
             TransactionLog.append(testLog, "WITHDRAW AC0012 3000");
             System.out.println("Appended entries to NIO TransactionLog at " + testLog);
 
-            // Generate report
             String report = ReportGenerator.generateDailyReport(logsDir, testReport);
             System.out.println("\nGenerated NIO Daily Report:\n" + report);
 
@@ -454,18 +431,15 @@ public class PracticalDemonstrator {
         Account a1 = new SavingsAccount("AC1001", "Kunal", 7000, 1000);
         Account a2 = new SavingsAccount("AC1002", "Sneha", 15000, 1000);
 
-        // Varargs saveAll
         accountRepo.saveAll(a1, a2);
         System.out.println("Saved accounts into generic Repository<Account>. Total: " + accountRepo.count());
         System.out.println("findById('AC1001'): " + accountRepo.findById("AC1001"));
 
-        // Reusing same generic repository for Customer!
         Repository<Customer> customerRepo = new Repository<>();
         Customer c1 = new Customer("CUST501", "Mohit", "mohit@bank.com", "9988776655", null);
         customerRepo.save(c1);
         System.out.println("Reused Repository<Customer> successfully: " + customerRepo.findById("CUST501"));
 
-        // Generic bounded method test
         Double[] balances = new Double[]{7000.0, 15000.0, 25000.0};
         double avg = Repository.average(balances);
         System.out.printf("Generic bounded method average(Double[]): %.2f INR\n", avg);

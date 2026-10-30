@@ -1,9 +1,5 @@
 package minibank.model;
 
-/**
- * CurrentAccount subclass (Practical 5 Part B).
- * Allows overdraft limit and provides 0.0% interest.
- */
 public class CurrentAccount extends Account {
     private static final long serialVersionUID = 1L;
     private final long overdraftLimit;
@@ -14,7 +10,7 @@ public class CurrentAccount extends Account {
     }
 
     public CurrentAccount(String ownerName, long openingBalance) {
-        this(ownerName, openingBalance, 5000L); // Default 5000 overdraft limit
+        this(ownerName, openingBalance, 5000L);
     }
 
     public CurrentAccount(String accountNumber, String ownerName, long balance, long overdraftLimit) {

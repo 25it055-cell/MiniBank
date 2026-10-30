@@ -15,16 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * Main application class for MiniBank (Practicals 1 through 14 Part B).
- * Combines the interactive console menu shell with complete backend integration.
- */
 public class MiniBank {
     private static final BankInfo BANK_INFO = new BankInfo("MiniBank India", "Headquarters - Nariman Point");
     private static final BankService bankService = new BankService();
 
     public static void main(String[] args) {
-        // Command-line flags for automated grading / testing
+
         if (args.length > 0) {
             if (args[0].equalsIgnoreCase("--demo")) {
                 PracticalDemonstrator.runAllPracticals();
@@ -35,7 +31,6 @@ public class MiniBank {
             }
         }
 
-        // Ensure sample accounts exist on fresh start if none loaded from persistence
         if (bankService.listAccounts().isEmpty()) {
             seedInitialData();
         }
@@ -64,7 +59,6 @@ public class MiniBank {
                 continue;
             }
 
-            // Using switch expression for menu navigation (Practicals 1 & 14 Part B)
             running = switch (option) {
                 case OPEN_ACCOUNT -> {
                     handleOpenAccount(scanner);
@@ -344,4 +338,3 @@ public class MiniBank {
         }
     }
 }
-

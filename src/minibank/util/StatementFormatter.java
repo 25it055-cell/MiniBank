@@ -8,9 +8,6 @@ import minibank.model.CurrentAccount;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-/**
- * Utility using StringBuilder to assemble multi-line account statements (Practical 4 Part B).
- */
 public class StatementFormatter {
 
     public static String buildStatement(Account account) {
@@ -30,7 +27,6 @@ public class StatementFormatter {
         sb.append("Interest Rate  : ").append(account.interestRate()).append("% p.a.\n");
         sb.append("Current Balance: ").append(account.getBalance()).append(" INR\n");
 
-        // Specific details based on account subtype using pattern matching instanceof
         if (account instanceof SavingsAccount sa) {
             sb.append("Minimum Balance: ").append(sa.getMinBalance()).append(" INR\n");
         } else if (account instanceof CurrentAccount ca) {

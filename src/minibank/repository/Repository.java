@@ -7,16 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Generic repository using reflection on @Id annotation (Practical 13 Part B).
- * Reusable for any entity type, such as Account or Customer.
- */
 public class Repository<T> {
     private final Map<String, T> storage = new HashMap<>();
 
-    /**
-     * Finds the field annotated with @Id in the entity class hierarchy and returns its string value.
-     */
     private String extractId(T entity) {
         if (entity == null) {
             throw new IllegalArgumentException("Entity cannot be null");
@@ -73,9 +66,6 @@ public class Repository<T> {
         return storage.size();
     }
 
-    /**
-     * Generic bounded method: calculates average of any numeric array (Practical 13 Part B).
-     */
     public static <N extends Number> double average(N[] values) {
         if (values == null || values.length == 0) {
             return 0.0;
@@ -89,4 +79,3 @@ public class Repository<T> {
         return sum / values.length;
     }
 }
-

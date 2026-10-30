@@ -11,14 +11,6 @@ import minibank.util.StatePersister;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-/**
- * Unit Test suite verifying core banking rules (Practical 14 Part B).
- * Asserts:
- *  1. Deposit increases balance
- *  2. Withdrawal exceeding balance/limit throws exception
- *  3. Concurrent deposits maintain balance accuracy
- *  4. State persistence save & reload keeps data intact
- */
 public class MiniBankTest {
 
     public static void runAllTests() {
@@ -80,7 +72,7 @@ public class MiniBankTest {
         Account acc = new SavingsAccount("TestUser", 2000, 1000);
         boolean threw = false;
         try {
-            acc.withdraw(1500); // would leave 500 which is < minBalance 1000
+            acc.withdraw(1500);
         } catch (InsufficientFundsException e) {
             threw = true;
         } catch (InvalidAmountException e) {
@@ -144,4 +136,3 @@ public class MiniBankTest {
         runAllTests();
     }
 }
-

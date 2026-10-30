@@ -1,9 +1,5 @@
 package minibank.service;
 
-/**
- * AutoCloseable banking session for demonstrating try-with-resources (Practical 8 Part B).
- * Guarantees session closing and resource cleanup even if exceptions are thrown.
- */
 public class BankSession implements AutoCloseable {
     private final String sessionId;
     private final String operator;
@@ -32,4 +28,3 @@ public class BankSession implements AutoCloseable {
         return sessionId;
     }
 }
-

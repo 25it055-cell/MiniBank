@@ -1,9 +1,5 @@
 package minibank.exception;
 
-/**
- * Exception thrown when withdrawal/transfer exceeds available balance (Practical 8 Part B).
- * Holds the shortfall amount.
- */
 public class InsufficientFundsException extends BankException {
     private final long shortfall;
 
@@ -21,4 +17,3 @@ public class InsufficientFundsException extends BankException {
         return shortfall;
     }
 }
-

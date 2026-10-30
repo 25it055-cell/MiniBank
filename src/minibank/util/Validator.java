@@ -2,9 +2,6 @@ package minibank.util;
 
 import java.util.regex.Pattern;
 
-/**
- * Input validator using precompiled regular expressions (Practical 4 Part B).
- */
 public class Validator {
     private static final Pattern MOBILE_PATTERN = Pattern.compile("^[6-9]\\d{9}$");
     private static final Pattern EMAIL_PATTERN = Pattern.compile("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$");
@@ -28,11 +25,7 @@ public class Validator {
         return ifsc != null && IFSC_PATTERN.matcher(ifsc.trim()).matches();
     }
 
-    /**
-     * Supplementary problem Practical 4: validates positive integer amount.
-     */
     public static boolean isValidAmount(String amountStr) {
         return amountStr != null && AMOUNT_PATTERN.matcher(amountStr.trim()).matches();
     }
 }
-

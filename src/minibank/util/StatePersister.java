@@ -12,14 +12,8 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-/**
- * Object serialization and deserialization utility (Practical 11 Part B).
- */
 public class StatePersister {
 
-    /**
-     * Serializes an array of Account objects to disk using ObjectOutputStream.
-     */
     public static void save(Account[] accounts, Path file) throws IOException {
         if (file.getParent() != null) {
             Files.createDirectories(file.getParent());
@@ -32,9 +26,6 @@ public class StatePersister {
         }
     }
 
-    /**
-     * Deserializes an array of Account objects from disk using ObjectInputStream.
-     */
     public static Account[] load(Path file) throws IOException, ClassNotFoundException {
         if (!Files.exists(file)) {
             return new Account[0];
@@ -46,4 +37,3 @@ public class StatePersister {
         }
     }
 }
-

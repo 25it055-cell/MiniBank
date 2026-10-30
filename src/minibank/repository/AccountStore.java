@@ -10,9 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * AccountStore managing accounts and transaction history with Collections Framework (Practical 12 Part B).
- */
 public class AccountStore {
     private final Map<String, Account> accounts = new HashMap<>();
     private final Map<String, Account> concurrentAccounts = new ConcurrentHashMap<>();
@@ -45,18 +42,12 @@ public class AccountStore {
         return Collections.unmodifiableList(transactionHistory);
     }
 
-    /**
-     * Returns an ArrayList<Account> sorted by balance descending using a Comparator (Practical 12 Part B).
-     */
     public synchronized ArrayList<Account> sortedByBalance() {
         ArrayList<Account> sortedList = new ArrayList<>(accounts.values());
         sortedList.sort(Comparator.comparingLong(Account::getBalance).reversed());
         return sortedList;
     }
 
-    /**
-     * Supplementary problem Practical 12: filters accounts with balance >= threshold.
-     */
     public synchronized List<Account> findAccountsWithBalanceAbove(long threshold) {
         List<Account> filtered = new ArrayList<>();
         for (Account acc : accounts.values()) {
@@ -67,4 +58,3 @@ public class AccountStore {
         return filtered;
     }
 }
-

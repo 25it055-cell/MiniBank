@@ -1,9 +1,5 @@
 package minibank.model;
 
-/**
- * SavingsAccount subclass (Practical 5 Part B).
- * Enforces minimum balance rule and pays 4.0% interest.
- */
 public class SavingsAccount extends Account {
     private static final long serialVersionUID = 1L;
     private final long minBalance;
@@ -14,7 +10,7 @@ public class SavingsAccount extends Account {
     }
 
     public SavingsAccount(String ownerName, long openingBalance) {
-        this(ownerName, openingBalance, 1000L); // Default 1000 INR minimum balance
+        this(ownerName, openingBalance, 1000L);
     }
 
     public SavingsAccount(String accountNumber, String ownerName, long balance, long minBalance) {

@@ -1,8 +1,5 @@
 package minibank.model;
 
-/**
- * Record representing a parsed banking command (Practical 4 Part B).
- */
 public record Command(TransactionType type, String accountNumber, long amount) {
     public Command {
         if (type == null) {
@@ -13,4 +10,3 @@ public record Command(TransactionType type, String accountNumber, long amount) {
         }
     }
 }
-

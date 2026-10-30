@@ -3,10 +3,6 @@ package minibank.service;
 import minibank.exception.InvalidAmountException;
 import minibank.model.Account;
 
-/**
- * Runnable worker for multithreaded account operations (Practical 9 Part B).
- * Used to demonstrate race conditions vs thread-safe synchronization.
- */
 public class AccountWorker implements Runnable {
     private final Account account;
     private final int times;
@@ -21,7 +17,7 @@ public class AccountWorker implements Runnable {
     @Override
     public void run() {
         String threadName = Thread.currentThread().getName();
-        // Observing thread lifecycle
+
         for (int i = 0; i < times; i++) {
             try {
                 account.deposit(amount);
@@ -31,4 +27,3 @@ public class AccountWorker implements Runnable {
         }
     }
 }
-

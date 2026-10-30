@@ -12,15 +12,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 
-/**
- * End-of-day audit and summary report generator using Java NIO (Practical 11 Part B).
- */
 public class ReportGenerator {
 
-    /**
-     * Walks logs directory, computes deposit/withdrawal totals, and writes summary report.
-     * Skips non-.log or empty files (Practical 11 Supplementary Problem).
-     */
     public static String generateDailyReport(Path logsDir, Path reportFile) throws IOException {
         if (!Files.exists(logsDir)) {
             Files.createDirectories(logsDir);
@@ -41,7 +34,7 @@ public class ReportGenerator {
 
         try (DirectoryStream<Path> stream = Files.newDirectoryStream(logsDir)) {
             for (Path entry : stream) {
-                // Supplementary rule: skip files not ending in .log or empty
+
                 String fileName = entry.getFileName().toString();
                 if (!fileName.endsWith(".log") || Files.size(entry) == 0L) {
                     continue;
@@ -56,8 +49,7 @@ public class ReportGenerator {
                     String line;
                     while ((line = reader.readLine()) != null) {
                         totalLineCount++;
-                        // Line format: [timestamp] OPERATION ACxxxx AMOUNT ...
-                        // Extract content after timestamp if present
+
                         String payload = line;
                         int closeBracket = line.indexOf(']');
                         if (closeBracket != -1) {
@@ -105,4 +97,3 @@ public class ReportGenerator {
         return reportText;
     }
 }
-

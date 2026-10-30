@@ -1,8 +1,5 @@
 package minibank.model;
 
-/**
- * Enum defining navigation options for MiniBank console menu (Practicals 1 & 14 Part B).
- */
 public enum MenuOption {
     OPEN_ACCOUNT(1, "Open New Account"),
     DEPOSIT(2, "Deposit Funds"),
@@ -42,4 +39,3 @@ public enum MenuOption {
         return null;
     }
 }
-

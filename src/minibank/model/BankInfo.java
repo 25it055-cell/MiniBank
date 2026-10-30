@@ -2,10 +2,6 @@ package minibank.model;
 
 import java.io.Serializable;
 
-/**
- * Record representing Bank Information (Practical 1 Part B).
- * Java auto-generates constructor, getters (name(), branch()), equals, hashCode and toString.
- */
 public record BankInfo(String name, String branch) implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -16,4 +12,3 @@ public record BankInfo(String name, String branch) implements Serializable {
                "========================================================";
     }
 }
-

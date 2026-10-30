@@ -8,10 +8,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Reflective audit logger (Practical 14 Part B).
- * Inspects methods for @Audit annotation and records operations.
- */
 public class AuditLogger {
     private static final List<String> auditTrail = new ArrayList<>();
 
@@ -44,4 +40,3 @@ public class AuditLogger {
         return new ArrayList<>(auditTrail);
     }
 }
-
